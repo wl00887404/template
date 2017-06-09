@@ -1,0 +1,595 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>使用說明</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            font-size: 2em;
+            color: white;
+            background-color: black;
+        }
+        pre{
+            font-size: 0.6em;
+        }
+        p{
+            //text-indent: 1.5em;
+        }
+        ul ul li{
+            list-style-type:none;
+            color:white;
+        }
+    </style>
+</head>
+<body >
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div>
+                    <h1>模板系統</h1>
+                    <small>bug report : wl00887404@gmail.com</small>
+                    <h2>安裝目錄</h2>
+                    <pre>
+    {any}-|--templateManage.aspx
+          |--templateManage.asmx
+          |--template.js
+          |--assets  -|--jquery.multiple.select.js
+                      |--multiple-select.css
+                      |--multiple-select.png
+                      |--template.xml
+                      |--templateManage.css                   
+                  </pre>
+                  <p>
+                    <ul style=" color:  yellow;">
+                        <li><strong>templateManage.aspx</strong></li>
+                        <ul>
+                            <li><p>模板設定管理頁面<br/>頁面以react.js 、jquery 、jquery-ui、bootstrap 建構畫面</p></li>
+                        </ul>
+                        <li><strong>templateManage.asmx</strong></li>
+                        <ul>
+                            <li><p>模板設定後端處理檔<br>以C# 建構WebMethod</p></li>
+                        </ul>
+                        <li><strong>template.js</strong></li>
+                        <ul>
+                            <li><p>模板主要api<br>以需引入自所需頁面</p></li>
+                        </ul>
+                        <li>
+                            <strong>jquery.multiple.select.js<br>jquery.multiple.select.js<br>multiple-select.css<br>multiple-select.png</strong>
+                        </li>
+                        <ul>
+                            <li><p>jquery多選插件相關檔案</p></li>
+                        </ul>
+                        <li><strong>templateManage.css</strong></li>
+                        <ul>
+                            <li><p>templateManage.aspx頁面css檔</p></li>
+                        </ul>
+                    </ul>
+                    <h3>系統安裝為相對路徑，不建議任意更動檔案相對位置</h3>
+                    <hr>
+                </div>
+                <div>
+                    <h1>Quickly Started</h1>
+                    <p>
+                        <ol>
+                            <li><p>import jquery v1.9 以上</p></li>
+                            <li><p>import template.js</p></li>
+                        </ol>
+                    </p>
+                    <pre>
+    &#x3Cscript>
+        $(target).template({
+            {options}
+        });
+    &#x3C/script>
+                    </pre>
+                    <p>
+                        　　target 即可連結模板系統<br>
+                        　　點擊target 可呼叫叫模板對話框<br>
+                        如：
+                    </p>
+                    <p style="text-align:right;">
+                        <button type="button" class="btn btn-primary btn-lg">使用模板</button>
+                    </p>
+                    <p>
+                    <h3>Options選項</h3>
+                        <ul style=" color:  yellow;">
+                            <li>width</li>
+                            <ul>
+                                <li>設定對話框寬度</li>
+                                <li>預設608.95　單位為px</li>
+                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{width:'500'}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>height</li>
+                            <ul>
+                                <li>設定對話框高度</li>
+                                <li>預設為500　單位為px</li>
+                                                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{height:'608.95'}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>atTop</li>
+                            <ul>
+                                <li>對話框彈出在target 的上方</li>
+                                <li>預設為true　若為false 會呈現在下方</li>
+                                                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{atTop:'false'}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>atRight</li>
+                            <ul>
+                                <li>對話框彈出在target的右方</li>
+                                <li>預設為true　若為false 會呈現在左方</li>
+                                                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{atRight:'false'}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li style="color:lightblue;list-style-type:none;font-size:0.9em;" >若atTop、atRight皆無設置　模板將自動計算位置優先權為：右上、左上、右下、左下</li>    
+                            <li>intoWhere</li>
+                            <ul>
+                                <li>當確定按下後，將模板產生的html輸出至哪</li>
+                                <li>預設為undefind　若要只需傳入DOM元素</li>
+                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">
+                                        var body=document.getElementsByTagName('body')[0];<br>{intoWhere:body}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>callback</li>
+                            <ul>
+                                <li>callback()會在模板輸出完後執行</li>
+                                <li>callback=fuction(templateHTML)</li>
+                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{callback:function(txt){alert(txt);}}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>outputType</li>
+                            <ul>
+                                <li>模板輸出類型</li>
+                                <li>預設為'html'　'text'會輸出純文字</li>
+                                                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{outputType:'text',callback:function(txt){alert(txt);}}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                            <li>focus</li>
+                            <ul>
+                                <li>可指定只顯示某資料夾內容</li>
+                                <li>預設為'目錄'　'目錄>使用範例'會focus在「使用範例」</li>
+                                                                <li>
+                                    <p style="text-align:right;">
+                                        <button type="button" class="btn btn-primary btn-lg">{focus:'目錄>使用範例'}</button>
+                                    </p>
+                                </li>
+                            </ul>
+                        </ul>
+                    </p>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+</div>
+    <script type="text/javascript">
+$('document').ready(function(){
+    $.getScript('assets/jquery.multiple.select.js');
+    var css=$.parseHTML('<link href="assets/multiple-select.css" rel="stylesheet" /><link href="assets/templateManage.css" rel="stylesheet" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />');
+    $('head').prepend(css);
+    var body=document.getElementsByTagName('body')[0];
+    $('button:eq(0)').template();
+    $('button:eq(1)').template({width:'500'});
+    $('button:eq(2)').template({height:'608.95'});
+    $('button:eq(3)').template({atTop:'false'});
+    $('button:eq(4)').template({atRight:'false'});
+    $('button:eq(5)').template({intoWhere:body});
+    $('button:eq(6)').template({callback:function(txt){alert(txt);}});
+    $('button:eq(7)').template({outputType:'text',callback:function(txt){alert(txt);}});
+    $('button:eq(8)').template({focus:'目錄>使用範例'});
+});
+$.prototype.template=function(option){
+
+    if(!option){
+        option={};
+    }
+    var height=option.height!=undefined?option.height:500;
+    var width=option.width!=undefined?option.width:608.95;
+    var atTop=option.atTop!=undefined?option.atTop:undefined;
+    var atRight=option.atRight!=undefined?option.atRight:undefined;
+    var intoWhere=option.intoWhere!=undefined?option.intoWhere:undefined;
+    var callback=option.callback!=undefined?option.callback:undefined;
+    var outputType=option.outputType!=undefined?option.outputType:undefined;
+    this.css({ cursor: 'pointer' });
+    this.click(function(){
+        var data;
+        if(document.getElementById('templateMainBubble')!=null){
+            return false;
+        }
+        data=$.parseXML('<?xml version="1.0" encoding="UTF-8"?><root name="目錄"><directory name="使用範例"><template name="範例模板"><text>今天是　</text><dropdown>2016</dropdown><text>年</text><dropdown>1,2,3,4,5,6,7,8,9,10,11,12</dropdown><text>月</text><dropdown>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31</dropdown><text>號</text><lineFeed/><text>我的心情很</text><dropdown_checkbox>開心,難過,寂寞,孤單,興奮</dropdown_checkbox></template></directory></root>');
+        if(data==undefined){
+            return false;
+        }
+        if(option.focus!=undefined){
+            var str=option.focus.split('>');
+            str=str.map(function(item,i){
+                if(i==0){
+                    return "/root[@name='目錄']"
+                }
+                else{
+                    if(item==''){
+                        return "/directory";   
+                    }
+                    else{
+                        return "/directory[@name='"+item+"']";
+                    }
+                }
+            }).reduce(function(a,b){
+                return a+b;
+            });
+            var node = document.evaluate(str,data, null, XPathResult.ANY_TYPE, null).iterateNext();
+            if(node!=null){
+                root=$.parseXML("<root name='"+node.getAttribute('name')+"'></root>");
+                rootElement=root.getElementsByTagName('root')[0];
+                for(var i=0;i<node.children.length;i++){
+                    rootElement.appendChild(node.children[i]);
+                }
+                data=root;
+            }
+        }
+
+        var main = Main(data,$(this).offset().left,$(this).offset().top,$(this).outerWidth(),$(this).outerHeight());
+        $('body').prepend(main);
+        $('.DirListItemChildrenNodesDiv:first').children('.verticalLine').outerHeight($('.DirListItemChildrenNodesDiv:first').outerHeight()-$('.DirListItemChildrenNodesDiv:first').children('.DirListItem:last').outerHeight()+22.5);
+});
+    function Main(data,x,y,w,h){
+        var self=$.parseHTML('<div id="templateMainBubble" class="boundBlock"></div>');
+        var dirList=$.parseHTML('<div id="directoryMenu" style="height:100%;">'+'</div>')[0];
+        var root=DirListItem(data.getElementsByTagName('root')[0]);
+        $(dirList).append(root);
+        var cancel=$.parseHTML('<button type="button" class="btn btn-primary">取消</button>')[0];
+        $(cancel).click(function(){
+            $(self).remove();
+        });
+        
+        var buttonPanel=$.parseHTML('<div id="saveButtons"></div>')[0];
+        $(buttonPanel).append(cancel);
+        $(dirList).append(buttonPanel);
+        $(self).append(dirList);
+        $(self).css({width:width+'px',height:height+'px',position:'absolute',backgroundColor:'white',zIndex:'3',textAlign:'left',marginTop:'0px',padding:'20px',color:'black'});
+        if(atTop==undefined){
+            if((y-height-10)>0){
+                atTop=true;
+            }
+            else{
+                atTop=false;
+            }
+        }
+        if(atRight==undefined){
+            if((x-width)>0){
+                atRight=false;
+            }
+            else{
+                atRight=true;
+            }
+        }
+        if(atTop&&atRight){
+            //右上
+            var arrowStyle={position: 'absolute',bottom:'-18.2px',left:'6px', width:'0px',height:'0px',border:'10px solid transparent',borderTopColor:'white',zIndex:"6"};
+            var bArrowStyle={position: 'absolute',bottom:'-20.2px',left:'6px',width:'0px',height:'0px',border:'10px solid transparent',borderTopColor:'#e3e3e3',zIndex:"4"};
+            var css={top:y-height-10,left:x}
+        }
+        else if(atTop==true&&atRight!=true){
+            //左上
+            var arrowStyle={position: 'absolute',bottom:'-18.2px',right:'6px', width:'0px',height:'0px',border:'10px solid transparent',borderTopColor:'white',zIndex:"6"};
+            var bArrowStyle={position: 'absolute',bottom:'-20.2px',right:'6px',width:'0px',height:'0px',border:'10px solid transparent',borderTopColor:'#e3e3e3',zIndex:"4"};
+            var css={top:y-height-10,left:x-width+w}
+
+        }
+        else if(atTop!=true&&atRight==true){
+            //右下
+            var arrowStyle={position: 'absolute',top:'-18.2px',left:'6px', width:'0px',height:'0px',border:'10px solid transparent',borderBottomColor:'white',zIndex:"6"};
+            var bArrowStyle={position: 'absolute',top:'-20.2px',left:'6px',width:'0px',height:'0px',border:'10px solid transparent',borderBottomColor:'#e3e3e3',zIndex:"4"};
+            var css={top:y+h+10,left:x}
+            
+        }
+        else{
+            //左下
+            var arrowStyle={position: 'absolute',top:'-18.2px',right:'6px', width:'0px',height:'0px',border:'10px solid transparent',borderBottomColor:'white',zIndex:"6"};
+            var bArrowStyle={position: 'absolute',top:'-20.2px',right:'6px',width:'0px',height:'0px',border:'10px solid transparent',borderBottomColor:'#e3e3e3',zIndex:"4"};
+            var css={top:y+h+10,left:x-width+w}
+        }
+
+        $(self).append($('<div/>').css(arrowStyle),$('<div/>').css(bArrowStyle));
+        $(self).css(css);
+        return self 
+    }
+    function DirListItem(data){
+        var self=$.parseHTML('<div class="DirListItem"></div>')[0];
+        if(data.tagName=='root'||data.tagName=='directory'){
+            var profiles = data.childNodes;
+            var arr = [];
+            for (var key in profiles){
+                arr.push(profiles[key]);
+            }
+            var children=arr.filter(function(children){
+                if((children.tagName=='directory')||(children.tagName=='template')){
+                    return true;     
+                }
+                else{
+                    return false;
+                }
+            }).sort(function(a,b){
+                return a.tagName.charCodeAt(0)-b.tagName.charCodeAt(0);
+            }).map(function(children,i){
+                return DirListItem(children);
+            });
+
+            if(children.length!=0){
+                if(data.tagName=='root'){
+                    var dirListItemChildrenNodesDiv=DirListItemChildrenNodesDiv(children,true);
+                }
+                else{
+                    var dirListItemChildrenNodesDiv=DirListItemChildrenNodesDiv(children);
+                }
+            }
+        }
+        else{
+            var children={length:0};
+        }
+        var name=DirListItemName(data,dirListItemChildrenNodesDiv);
+        $(self).append(name);
+        if(dirListItemChildrenNodesDiv!=undefined){
+            $(self).append(dirListItemChildrenNodesDiv);
+        }
+        return self;
+    }
+    function DirListItemChildrenNodesDiv(children,open){
+                var self=$.parseHTML('<div class="DirListItemChildrenNodesDiv"></div>')[0];
+        var line='<div class="verticalLine" style="width:0px; float:left;border-left:1px solid black"></div>';
+        if(open==true){$(self).css({display:'block'})}else{$(self).css({display:'none'});}
+        $(self).append(line);
+        for(var i=0;i<children.length;i++){
+            $(self).append(children[i]);
+        }
+        return self;
+    }
+    function DirListItemName(data,childDiv){
+        var self=$.parseHTML('<div class="DirListItemName"></div>')[0];
+        switch(data.tagName){
+            case 'root':
+            var style={position:'relative',left:'15px'};
+            var icon='<span class="glyphicon glyphicon-folder-open" style="color:rgb(255, 204, 0);font-size:20px;margin:0px 5px;"></span>';
+            break;
+            case 'template':
+            var dash='<span class="dash" style="padding:0px;margin:0px;width:20px;border-bottom:black 1px solid;"}>　</span>';
+            var icon='<span class="glyphicon glyphicon glyphicon-list-alt" style="color:#1a1a1a;font-size:20px;margin:0px 5px;"></span>';
+            break;
+            case 'directory':
+            var dash='<span class="dash" style="padding:0px;margin:0px;width:20px;border-bottom:black 1px solid;"}>　</span>';
+            var icon='<span class="glyphicon glyphicon-folder-open" style="color:rgb(255, 204, 0);font-size:20px;margin:0px 5px;"></span>';
+            if(childDiv!=undefined){
+                var switchButton=$.parseHTML('<button class="directoryMenuSwitch">+</button>')[0];  
+                $(switchButton).click(function(){
+                    if($(childDiv).css('display')=='block'){
+                        $(childDiv).css({'display':'none'});
+                        this.innerHTML='+';
+                    }
+                    else{
+                        $(childDiv).css({'display':'block'});
+                        this.innerHTML='-';
+                    }
+
+                    $(childDiv).children('.verticalLine').outerHeight($(childDiv).outerHeight()-$(childDiv).children('.DirListItem:last').outerHeight()+22.5);
+                    $(this).parents('.DirListItemChildrenNodesDiv').each(function(){
+                        var subheight=$(this).outerHeight()-$(this).children('.DirListItem:last').outerHeight();
+                        $(this).children('.verticalLine').outerHeight(subheight+22.5);
+                    });
+
+                }) 
+            }
+            break;
+            default:
+            break;    
+        }
+        var name=$.parseHTML('<span>'+icon+'<span>'+data.getAttribute('name')+'</span>'+'</span>')[0];
+        if(data.tagName=='template'){
+            $(name).css({cursor:'pointer'});
+            $(name).click(function(){
+                loadTemp(data);
+            });
+        }
+
+        if(style!=undefined)$(self).css(style);
+        if(dash!=undefined)$(self).append(dash);
+        if(switchButton!=undefined)$(self).append(switchButton);
+        $(self).append(name);/*<span onClick={click}> to load temp*//*var spanStyle={cursor:'pointer'};*/
+        return self;
+
+    }
+    function loadTemp(data){
+         var self=$.parseHTML('<div id="templatePanel"style="height:100%;"></div>');
+        $('#directoryMenu').hide();
+        var profiles = data.childNodes;
+        var arr = [];
+        for (var key in profiles){
+            if(profiles[key].nodeType==1){
+                arr.push(profiles[key]);
+            }
+        }
+        var templateName='<div id="templateName" >'+data.getAttribute('name')+'</div>';
+        var templateContentItem=arr.map(function(data,i){
+            return TemplateContentItem(data,i);
+        });
+        var templateContent=$.parseHTML('<div id="templateContent" style="height:80%"></div>')[0];
+        $(templateContent).append(templateContentItem);
+        var submit=$.parseHTML('<button type="button" class="btn btn-primary">確定</button>')[0];
+        $(submit).click(function(){
+            getTempHtml(arr);
+        })
+        var cancel=$.parseHTML('<button type="button" class="btn btn-primary">取消</button>')[0];
+        $(cancel).click(function(){
+            $('#directoryMenu').show();
+            $(self).remove();
+        });
+        var buttonPanel=$.parseHTML('<div id="saveButtons"></div>')[0];
+        $(buttonPanel).append(submit,cancel);
+
+        $(self).append(templateName,templateContent,buttonPanel);
+        $('#templateMainBubble:last').append(self);
+        $('#templatePanel select:not([multiple])').multipleSelect({ width: 100, single: true, placeholder: "單選" }).parent().removeAttr('style');
+        $('#templatePanel select[multiple]').multipleSelect({ width: 150, placeholder: "多選", selectAll: false, ellipsis: true, countSelected: false }).parent().removeAttr('style'); 
+    }
+    function TemplateContentItem(data,i){
+        var className ='inputDiv';
+         switch(data.tagName){
+            case "text":
+            var inputArea = '<span>'+data.innerHTML+'</span>';
+            break;
+
+            case "inputTextBox":
+            var inputArea = "<input type='text' className='inputTextBox' placeholder='"+data.innerHTML+"'/>";
+            break;
+
+            case "dropdown":
+            var items = data.innerHTML.split(',');
+            items.unshift("");
+            items=items.filter(function(item,i){
+                if(item==''&&i!=0){
+                    return false;
+                }
+                else{
+                    return true
+                }
+            }).map(function(item){
+                if(item==''){
+                    return "<option value='"+item+"'>不選取</option>";
+                }
+                else{
+                    return "<option value='"+item+"'>"+item+"</option>";
+                }
+            }).reduce(function(a,b){return a+b});
+            var inputArea="<select name='"+i+"''>"+items+"</select>";                   
+            break;
+
+            case "dropdown_checkbox":
+            var items = data.innerHTML.split(',');
+            var items=items.filter(function(item,i){
+                if(item==''){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }).map(function(item){
+                return "<option value='"+item+"'>"+item+"</option>";
+            }).reduce(function(a,b){return a+b});
+            var inputArea="<select multiple name='"+i+"''>"+items+"</select>";                 
+            break;
+
+            case "lineFeed":
+            className+=' lineFeed';
+            var inputArea='<div class="dotDash"></div>';
+            break;
+
+            case "image":
+            var inputArea="<img src='"+data.innerHTML+"' width='100%' alt='無法連接圖片' />";
+            break;
+
+            default:
+            break;
+        }
+        return $.parseHTML("<div class='"+className+"'>"+inputArea+"</div>")[0];
+    }
+    function getTempHtml(dataArr){
+        if(outputType=='text'){
+        var returnObj=dataArr.map(function(data,i){
+            switch(data.tagName){
+                case "text":
+                return data.innerHTML;
+                break;
+
+                case "inputTextBox":
+                return $('.inputDiv:eq('+i+')').val();
+                break;
+
+                case "dropdown":
+                return $('.inputDiv:eq('+i+') select').multipleSelect("getSelects");              
+                break;
+
+                case "dropdown_checkbox":
+                return $('.inputDiv:eq('+i+') select').multipleSelect("getSelects");              
+                break;
+
+                case "lineFeed":
+                return '\n'
+                break;
+
+                case "image":
+                break;
+
+                default:
+                break;
+            }
+        }).reduce(function(a,b){
+            return a+b;
+        });
+    }
+    else{
+        var returnObj=dataArr.map(function(data,i){
+            switch(data.tagName){
+                case "text":
+                return '<span>'+data.innerHTML+'</span>';
+                break;
+
+                case "inputTextBox":
+                return '<span>'+$('.inputDiv:eq('+i+')').val()+'</span>';
+                break;
+
+                case "dropdown":
+                return '<span>'+ $('.inputDiv:eq('+i+') select').multipleSelect("getSelects")+'</span>';              
+                break;
+
+                case "dropdown_checkbox":
+                return '<span>'+ $('.inputDiv:eq('+i+') select').multipleSelect("getSelects")+'</span>';              
+                break;
+
+                case "lineFeed":
+                return '<br />'
+                break;
+
+                case "image":
+                return "<img src='"+data.innerHTML+"' width='100%' alt='無法連接圖片' />";
+                break;
+
+                default:
+                break;
+            }
+        }).reduce(function(a,b){
+            return a+b;
+        });
+        
+    };
+        $('#templateMainBubble').remove();
+        if(intoWhere!=undefined){
+            $(intoWhere).append(returnObj);
+        }
+        if(callback!=undefined){
+            callback(returnObj);
+        }
+    }
+}
+</script>
+</body>
+</html>
