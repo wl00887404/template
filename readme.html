@@ -185,8 +185,8 @@
 </div>
     <script type="text/javascript">
 $('document').ready(function(){
-    $.getScript('assets/jquery.multiple.select.js');
-    var css=$.parseHTML('<link href="./template/assets/assets/multiple-select.css" rel="stylesheet" /><link href="./template/assets/templateManage.css" rel="stylesheet" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />');
+    $.getScript('./template/assets/jquery.multiple.select.js');
+    var css=$.parseHTML('<link href="./template/assets/multiple-select.css" rel="stylesheet" /><link href="./template/assets/templateManage.css" rel="stylesheet" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />');
     $('head').prepend(css);
     var body=document.getElementsByTagName('body')[0];
     $('button:eq(0)').template();
