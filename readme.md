@@ -5,4 +5,4 @@
 	可運行asp.net之伺服器
 
 
-詳細適用教學請見`readme.html`
+詳細適用教學請見 [readme.html](https://wl00887404.github.io/template/readme.html)
