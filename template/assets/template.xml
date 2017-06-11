@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <root name="目錄">
-  <directory name="病例類">
-    <template name="簡易病例">
-      <text>今天　</text>
-      <dropdown>AM,PM</dropdown>
-      <dropdown>1,2,3,4,5,6,7,8,9,10,11,12</dropdown>
-      <text>:</text>
-      <dropdown>00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59</dropdown>
-      <lineFeed>
-      </lineFeed>
-      <text>症狀：</text>
-      <dropdown_checkbox>發燒,噁心,嘔吐,頻尿,腹痛,全身無力</dropdown_checkbox>
-    </template>
-  </directory>
-  <directory name="圖片">
-    <template name="海豚">
-      <image>http://pic.pimg.tw/snow218/1368170545-2212286595_l.jpg</image>
-    </template>
-  </directory>
+    <directory name="病例類">
+        <template name="簡易病例">
+          <text>姓名：</text><inputTextBox />
+          <lineFeed/>
+            <text>時間：</text>
+            <dropdown>AM,PM</dropdown>
+            <dropdown>1,2,3,4,5,6,7,8,9,10,11,12</dropdown>
+            <text>:</text>
+            <dropdown>00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59</dropdown>
+            <lineFeed/>
+            <text>症狀：</text>
+            <dropdown_checkbox>發燒,噁心,嘔吐,頻尿,腹痛,全身無力</dropdown_checkbox>
+        </template>
+    </directory>
+    <directory name="圖片">
+        <template name="海豚">
+            <image>http://pic.pimg.tw/snow218/1368170545-2212286595_l.jpg</image>
+        </template>
+    </directory>
 </root>

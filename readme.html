@@ -6,9 +6,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <style type="text/css">
         body{
-            font-size: 2em;
-            color: white;
-            background-color: black;
+            /*font-size: 2em;*/
+            /*color: white;*/
+            /*background-color: black;*/
+            /*font-size: 1.6em;*/
         }
         pre{
             font-size: 0.6em;
@@ -18,7 +19,10 @@
         }
         ul ul li{
             list-style-type:none;
-            color:white;
+            /*color:white;*/
+        }
+        button{
+            text-align: left!important;
         }
     </style>
 </head>
@@ -41,7 +45,7 @@
                       |--templateManage.css                   
                   </pre>
                   <p>
-                    <ul style=" color:  yellow;">
+                    <ul>
                         <li>templateManage.aspx</li>
                         <ul>
                             <li><p>模板設定管理頁面<br/>頁面以react.js 、jquery 、jquery-ui、bootstrap 建構畫面</p></li>
@@ -52,10 +56,10 @@
                         </ul>
                         <li>template.js</li>
                         <ul>
-                            <li><p>模板主要api<br>以需引入自所需頁面</p></li>
+                            <li><p>模板主要api<br>需引入所需頁面</p></li>
                         </ul>
                         <li>
-                            jquery.multiple.select.js<br>jquery.multiple.select.js<br>multiple-select.css<br>multiple-select.png
+                            jquery.multiple.select.js、jquery.multiple.select.js、multiple-select.css、multiple-select.png
                         </li>
                         <ul>
                             <li><p>jquery多選插件相關檔案</p></li>
@@ -76,13 +80,11 @@
                             <li><p>import template.js</p></li>
                         </ol>
                     </p>
-                    <pre>
-    &#x3Cscript>
-        $(target).template({
-            {options}
-        });
-    &#x3C/script>
-                    </pre>
+                    <pre><code>&#x3Cscript>
+    $(target).template({
+        {options}
+    });
+&#x3C/script></code></pre>
                     <p>
                         　　target 即可連結模板系統<br>
                         　　點擊target 可呼叫叫模板對話框<br>
@@ -93,24 +95,24 @@
                     </p>
                     <p>
                     <h3>Options選項</h3>
-                        <ul style=" color:  yellow;">
+                        <ul>
                             <li>width</li>
                             <ul>
                                 <li>設定對話框寬度</li>
-                                <li>預設608.95　單位為px</li>
+                                <li>預設608.95px</li>
                                 <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{width:'500'}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{ width : '500' }</button>
                                     </p>
                                 </li>
                             </ul>
                             <li>height</li>
                             <ul>
                                 <li>設定對話框高度</li>
-                                <li>預設為500　單位為px</li>
+                                <li>預設為500px</li>
                                                                 <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{height:'608.95'}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{ height : '608.95' }</button>
                                     </p>
                                 </li>
                             </ul>
@@ -118,9 +120,9 @@
                             <ul>
                                 <li>對話框彈出在target 的上方</li>
                                 <li>預設為true　若為false 會呈現在下方</li>
-                                                                <li>
+                                <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{atTop:'false'}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{ atTop : 'false' }</button>
                                     </p>
                                 </li>
                             </ul>
@@ -128,13 +130,14 @@
                             <ul>
                                 <li>對話框彈出在target的右方</li>
                                 <li>預設為true　若為false 會呈現在左方</li>
-                                                                <li>
+                                <li>若atTop、atRight皆無設置　模板將自動計算位置優先權為：右上、左上、右下、左下</li>
+                                <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{atRight:'false'}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{ atRight : 'false' }</button>
                                     </p>
                                 </li>
                             </ul>
-                            <li style="color:lightblue;list-style-type:none;font-size:0.9em;" >若atTop、atRight皆無設置　模板將自動計算位置優先權為：右上、左上、右下、左下</li>    
+                            <li style="color:lightblue;list-style-type:none;font-size:0.9em;" ></li>    
                             <li>intoWhere</li>
                             <ul>
                                 <li>當確定按下後，將模板產生的html輸出至哪</li>
@@ -142,7 +145,7 @@
                                 <li>
                                     <p style="text-align:right;">
                                         <button type="button" class="btn btn-primary btn-lg">
-                                        var body=document.getElementsByTagName('body')[0];<br>{intoWhere:body}</button>
+                                        { intoWhere:document.body }</button>
                                     </p>
                                 </li>
                             </ul>
@@ -152,7 +155,7 @@
                                 <li>callback=fuction(templateHTML)</li>
                                 <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{callback:function(txt){alert(txt);}}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{ callback : function(txt){alert(txt);} }</button>
                                     </p>
                                 </li>
                             </ul>
@@ -162,7 +165,7 @@
                                 <li>預設為'html'　'text'會輸出純文字</li>
                                                                 <li>
                                     <p style="text-align:right;">
-                                        <button type="button" class="btn btn-primary btn-lg">{outputType:'text',callback:function(txt){alert(txt);}}</button>
+                                        <button type="button" class="btn btn-primary btn-lg">{<br/> outputType : 'text',<br/> callback:function(txt){alert(txt);}<br/>}</button>
                                     </p>
                                 </li>
                             </ul>

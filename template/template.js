@@ -1,10 +1,9 @@
-
-$('document').ready(function(){
-	$.getScript('assets/jquery.multiple.select.js');
-	var css=$.parseHTML('<link href="assets/multiple-select.css" rel="stylesheet" /><link href="assets/templateManage.css" rel="stylesheet" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />');
-	$('head').prepend(css);
+$('document').ready(function() {
+    $.getScript('assets/jquery.multiple.select.js');
+    var css = $.parseHTML('<link href="assets/multiple-select.css" rel="stylesheet" /><link href="assets/templateManage.css" rel="stylesheet" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />');
+    $('head').prepend(css);
 });
-$.prototype.template = function (option) {
+$.prototype.template = function(option) {
 
     if (!option) {
         option = {};
@@ -17,7 +16,7 @@ $.prototype.template = function (option) {
     var callback = option.callback != undefined ? option.callback : undefined;
     var outputType = option.outputType != undefined ? option.outputType : undefined;
     this.css({ cursor: 'pointer' });
-    this.click(function () {
+    this.click(function() {
         var data;
         if (document.getElementById('templateMainBubble') != null) {
             return false;
@@ -28,11 +27,11 @@ $.prototype.template = function (option) {
             type: 'POST',
             data: '',
             datatype: 'xml',
-            success: function (xml) {
+            success: function(xml) {
                 data = xml;
 
             },
-            error: function (xhr, status, err) {
+            error: function(xhr, status, err) {
                 console.error("templateManage.asmx/getTemplateXml", status, err.toString());
             }
         });
@@ -41,19 +40,17 @@ $.prototype.template = function (option) {
         }
         if (option.focus != undefined) {
             var str = option.focus.split('>');
-            str = str.map(function (item, i) {
+            str = str.map(function(item, i) {
                 if (i == 0) {
                     return "/root[@name='目錄']"
-                }
-                else {
+                } else {
                     if (item == '') {
                         return "/directory";
-                    }
-                    else {
+                    } else {
                         return "/directory[@name='" + item + "']";
                     }
                 }
-            }).reduce(function (a, b) {
+            }).reduce(function(a, b) {
                 return a + b;
             });
             var node = document.evaluate(str, data, null, XPathResult.ANY_TYPE, null).iterateNext();
@@ -71,13 +68,14 @@ $.prototype.template = function (option) {
         $('body').prepend(main);
         $('.DirListItemChildrenNodesDiv:first').children('.verticalLine').outerHeight($('.DirListItemChildrenNodesDiv:first').outerHeight() - $('.DirListItemChildrenNodesDiv:first').children('.DirListItem:last').outerHeight() + 22.5);
     });
+
     function Main(data, x, y, w, h) {
         var self = $.parseHTML('<div id="templateMainBubble" class="boundBlock"></div>');
         var dirList = $.parseHTML('<div id="directoryMenu" style="height:100%;">' + '</div>')[0];
         var root = DirListItem(data.getElementsByTagName('root')[0]);
         $(dirList).append(root);
         var cancel = $.parseHTML('<button type="button" class="btn btn-primary">取消</button>')[0];
-        $(cancel).click(function () {
+        $(cancel).click(function() {
             $(self).remove();
         });
 
@@ -89,16 +87,14 @@ $.prototype.template = function (option) {
         if (atTop == undefined) {
             if ((y - height - 10) > 0) {
                 atTop = true;
-            }
-            else {
+            } else {
                 atTop = false;
             }
         }
         if (atRight == undefined) {
             if ((x - width) > 0) {
                 atRight = false;
-            }
-            else {
+            } else {
                 atRight = true;
             }
         }
@@ -108,22 +104,19 @@ $.prototype.template = function (option) {
             var arrowStyle = { position: 'absolute', bottom: '-18.2px', left: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderTopColor: 'white', zIndex: "6" };
             var bArrowStyle = { position: 'absolute', bottom: '-20.2px', left: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderTopColor: '#e3e3e3', zIndex: "4" };
             var css = { top: y - height - 10, left: x }
-        }
-        else if (atTop == true && atRight != true) {
+        } else if (atTop == true && atRight != true) {
             //左上
             var arrowStyle = { position: 'absolute', bottom: '-18.2px', right: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderTopColor: 'white', zIndex: "6" };
             var bArrowStyle = { position: 'absolute', bottom: '-20.2px', right: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderTopColor: '#e3e3e3', zIndex: "4" };
             var css = { top: y - height - 10, left: x - width + w }
 
-        }
-        else if (atTop != true && atRight == true) {
+        } else if (atTop != true && atRight == true) {
             //右下
             var arrowStyle = { position: 'absolute', top: '-18.2px', left: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderBottomColor: 'white', zIndex: "6" };
             var bArrowStyle = { position: 'absolute', top: '-20.2px', left: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderBottomColor: '#e3e3e3', zIndex: "4" };
             var css = { top: y + h + 10, left: x }
 
-        }
-        else {
+        } else {
             //左下
             var arrowStyle = { position: 'absolute', top: '-18.2px', right: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderBottomColor: 'white', zIndex: "6" };
             var bArrowStyle = { position: 'absolute', top: '-20.2px', right: '6px', width: '0px', height: '0px', border: '10px solid transparent', borderBottomColor: '#e3e3e3', zIndex: "4" };
@@ -134,6 +127,7 @@ $.prototype.template = function (option) {
         $(self).css(css);
         return self
     }
+
     function DirListItem(data) {
         var self = $.parseHTML('<div class="DirListItem"></div>')[0];
         if (data.tagName == 'root' || data.tagName == 'directory') {
@@ -142,29 +136,26 @@ $.prototype.template = function (option) {
             for (var key in profiles) {
                 arr.push(profiles[key]);
             }
-            var children = arr.filter(function (children) {
+            var children = arr.filter(function(children) {
                 if ((children.tagName == 'directory') || (children.tagName == 'template')) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
-            }).sort(function (a, b) {
+            }).sort(function(a, b) {
                 return a.tagName.charCodeAt(0) - b.tagName.charCodeAt(0);
-            }).map(function (children, i) {
+            }).map(function(children, i) {
                 return DirListItem(children);
             });
 
             if (children.length != 0) {
                 if (data.tagName == 'root') {
                     var dirListItemChildrenNodesDiv = DirListItemChildrenNodesDiv(children, true);
-                }
-                else {
+                } else {
                     var dirListItemChildrenNodesDiv = DirListItemChildrenNodesDiv(children);
                 }
             }
-        }
-        else {
+        } else {
             var children = { length: 0 };
         }
         var name = DirListItemName(data, dirListItemChildrenNodesDiv);
@@ -174,6 +165,7 @@ $.prototype.template = function (option) {
         }
         return self;
     }
+
     function DirListItemChildrenNodesDiv(children, open) {
         var self = $.parseHTML('<div class="DirListItemChildrenNodesDiv"></div>')[0];
         var line = '<div class="verticalLine" style="width:0px; float:left;border-left:1px solid black"></div>';
@@ -184,6 +176,7 @@ $.prototype.template = function (option) {
         }
         return self;
     }
+
     function DirListItemName(data, childDiv) {
         var self = $.parseHTML('<div class="DirListItemName"></div>')[0];
         switch (data.tagName) {
@@ -200,18 +193,17 @@ $.prototype.template = function (option) {
                 var icon = '<span class="glyphicon glyphicon-folder-open" style="color:rgb(255, 204, 0);font-size:20px;margin:0px 5px;"></span>';
                 if (childDiv != undefined) {
                     var switchButton = $.parseHTML('<button class="directoryMenuSwitch">+</button>')[0];
-                    $(switchButton).click(function () {
+                    $(switchButton).click(function() {
                         if ($(childDiv).css('display') == 'block') {
                             $(childDiv).css({ 'display': 'none' });
                             this.innerHTML = '+';
-                        }
-                        else {
+                        } else {
                             $(childDiv).css({ 'display': 'block' });
                             this.innerHTML = '-';
                         }
 
                         $(childDiv).children('.verticalLine').outerHeight($(childDiv).outerHeight() - $(childDiv).children('.DirListItem:last').outerHeight() + 22.5);
-                        $(this).parents('.DirListItemChildrenNodesDiv').each(function () {
+                        $(this).parents('.DirListItemChildrenNodesDiv').each(function() {
                             var subheight = $(this).outerHeight() - $(this).children('.DirListItem:last').outerHeight();
                             $(this).children('.verticalLine').outerHeight(subheight + 22.5);
                         });
@@ -225,7 +217,7 @@ $.prototype.template = function (option) {
         var name = $.parseHTML('<span>' + icon + '<span>' + data.getAttribute('name') + '</span>' + '</span>')[0];
         if (data.tagName == 'template') {
             $(name).css({ cursor: 'pointer' });
-            $(name).click(function () {
+            $(name).click(function() {
                 loadTemp(data);
             });
         }
@@ -233,10 +225,11 @@ $.prototype.template = function (option) {
         if (style != undefined) $(self).css(style);
         if (dash != undefined) $(self).append(dash);
         if (switchButton != undefined) $(self).append(switchButton);
-        $(self).append(name);/*<span onClick={click}> to load temp*//*var spanStyle={cursor:'pointer'};*/
+        $(self).append(name); /*<span onClick={click}> to load temp*/ /*var spanStyle={cursor:'pointer'};*/
         return self;
 
     }
+
     function loadTemp(data) {
         var self = $.parseHTML('<div id="templatePanel"style="height:100%;"></div>');
         $('#directoryMenu').hide();
@@ -248,17 +241,17 @@ $.prototype.template = function (option) {
             }
         }
         var templateName = '<div id="templateName" >' + data.getAttribute('name') + '</div>';
-        var templateContentItem = arr.map(function (data, i) {
+        var templateContentItem = arr.map(function(data, i) {
             return TemplateContentItem(data, i);
         });
         var templateContent = $.parseHTML('<div id="templateContent" style="height:80%"></div>')[0];
         $(templateContent).append(templateContentItem);
         var submit = $.parseHTML('<button type="button" class="btn btn-primary">確定</button>')[0];
-        $(submit).click(function () {
+        $(submit).click(function() {
             getTempHtml(arr);
         })
         var cancel = $.parseHTML('<button type="button" class="btn btn-primary">取消</button>')[0];
-        $(cancel).click(function () {
+        $(cancel).click(function() {
             $('#directoryMenu').show();
             $(self).remove();
         });
@@ -270,6 +263,7 @@ $.prototype.template = function (option) {
         $('#templatePanel select:not([multiple])').multipleSelect({ width: 100, single: true, placeholder: "單選" }).parent().removeAttr('style');
         $('#templatePanel select[multiple]').multipleSelect({ width: 150, placeholder: "多選", selectAll: false, ellipsis: true, countSelected: false }).parent().removeAttr('style');
     }
+
     function TemplateContentItem(data, i) {
         var className = 'inputDiv';
         switch (data.tagName) {
@@ -284,36 +278,35 @@ $.prototype.template = function (option) {
             case "dropdown":
                 var items = data.innerHTML.split(',');
                 items.unshift("");
-                items = items.filter(function (item, i) {
+                items = items.filter(function(item, i) {
                     if (item == '' && i != 0) {
                         return false;
-                    }
-                    else {
+                    } else {
                         return true
                     }
-                }).map(function (item) {
+                }).map(function(item) {
                     if (item == '') {
                         return "<option value='" + item + "'>不選取</option>";
-                    }
-                    else {
+                    } else {
                         return "<option value='" + item + "'>" + item + "</option>";
                     }
-                }).reduce(function (a, b) { return a + b });
+                }).reduce(function(a, b) {
+                    return a + b });
                 var inputArea = "<select name='" + i + "''>" + items + "</select>";
                 break;
 
             case "dropdown_checkbox":
                 var items = data.innerHTML.split(',');
-                var items = items.filter(function (item, i) {
+                var items = items.filter(function(item, i) {
                     if (item == '') {
                         return false;
-                    }
-                    else {
+                    } else {
                         return true;
                     }
-                }).map(function (item) {
+                }).map(function(item) {
                     return "<option value='" + item + "'>" + item + "</option>";
-                }).reduce(function (a, b) { return a + b });
+                }).reduce(function(a, b) {
+                    return a + b });
                 var inputArea = "<select multiple name='" + i + "''>" + items + "</select>";
                 break;
 
@@ -331,9 +324,10 @@ $.prototype.template = function (option) {
         }
         return $.parseHTML("<div class='" + className + "'>" + inputArea + "</div>")[0];
     }
+
     function getTempHtml(dataArr) {
         if (outputType == 'text') {
-            var returnObj = dataArr.map(function (data, i) {
+            var returnObj = dataArr.map(function(data, i) {
 
                 switch (data.tagName) {
                     case "text":
@@ -362,12 +356,11 @@ $.prototype.template = function (option) {
                     default:
                         break;
                 }
-            }).reduce(function (a, b) {
+            }).reduce(function(a, b) {
                 return a + b;
             });
-        }
-        else {
-            var returnObj = dataArr.map(function (data, i) {
+        } else {
+            var returnObj = dataArr.map(function(data, i) {
 
                 switch (data.tagName) {
                     case "text":
@@ -397,7 +390,7 @@ $.prototype.template = function (option) {
                     default:
                         break;
                 }
-            }).reduce(function (a, b) {
+            }).reduce(function(a, b) {
                 return a + b;
             });
 
